@@ -95,8 +95,9 @@
   <div class="container">
     <div class="search-bar">
       <input type="text" id="searchInput" placeholder="Search products...">
+      <!-- ✅ Change option value for All to lowercase -->
       <select id="filterSelect">
-        <option value="ALL">All </option>
+        <option value="all">All</option> <!-- was "ALL", change to "all" -->
         <option value="KENT">KENT</option>
         <option value="INALSA">INALSA</option>
       </select>
@@ -179,26 +180,28 @@
       window.location.href = "product.html";
     }
 
-    document.getElementById("searchInput").addEventListener("input", function () {
-      const searchTerm = this.value.toLowerCase();
-      const filterValue = document.getElementById("filterSelect").value;
+  document.getElementById("searchInput").addEventListener("input", function () {
+      const searchTerm = this.value.toLowerCase().trim(); // trim spaces
+      const filterValue = document.getElementById("filterSelect").value.toLowerCase(); // convert to lowercase
       const filtered = products.filter(product =>
         product.name.toLowerCase().includes(searchTerm) &&
-        (filterValue === "all" || product.company === filterValue)
+        (filterValue === "all" || product.company.toLowerCase() === filterValue) // lowercase comparison
       );
       displayProducts(filtered);
     });
 
+    // ✅ FIX: same lowercase normalization for filter change
     document.getElementById("filterSelect").addEventListener("change", function () {
-      const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-      const filterValue = this.value;
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase().trim();
+      const filterValue = this.value.toLowerCase(); // convert to lowercase
       const filtered = products.filter(product =>
         product.name.toLowerCase().includes(searchTerm) &&
-        (filterValue === "all" || product.company === filterValue)
+        (filterValue === "all" || product.company.toLowerCase() === filterValue)
       );
       displayProducts(filtered);
     });
 
+    displayProducts(products);
     displayProducts(products);
   </script>
 </body>
