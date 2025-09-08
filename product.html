@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .zoom-container {
+      overflow: hidden;
+      display: inline-block;
+    }
+    .zoom-container img {
+      width: 100%;
+      max-width: 400px;
+      transition: transform 0.4s ease;
+      cursor: zoom-in;
+    }
+    .zoom-container img:hover {
+      transform: scale(1.5);
+      cursor: zoom-out;
+    }
+    h1 {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+    h2 {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #555;
+    }
+    p {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    a {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: white;
+      background: #007bff;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+    a:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="zoom-container">
+      <img id="productImage" src="" alt="Product">
+    </div>
+    <h1 id="productName"></h1>
+    <h2 id="productCompany"></h2>
+    <p id="productDescription"></p>
+    <a href="index.html">⬅ Back to Products</a>
+  </div>
+
+  <script>
+    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+    if(product) {
+      document.getElementById("productImage").src = product.image;
+      document.getElementById("productName").textContent = product.name;
+      document.getElementById("productCompany").textContent = product.company;
+      document.getElementById("productDescription").textContent = product.description;
+    }
+  </script>
+</body>
+</html>

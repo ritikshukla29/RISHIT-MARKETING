@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RISHIT MARKETING</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    header {
+      background: #007bff;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .contact-header {
+      background: #0056b3;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
+    .container {
+      width: 90%;
+      margin: 20px auto;
+    }
+    .search-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .search-bar input, .search-bar select {
+      padding: 10px;
+      width: 48%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .product-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .product-card:hover {
+      transform: scale(1.05);
+    }
+    .product-card img {
+      max-width: 100%;
+      height: 150px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .product-card h3 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    .product-card p {
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>RISHIT MARKETING</header>
+ <div class="contact-header">
+    <p>
+        📍 <a href="https://maps.google.com/?cid=1107365581858757761&entry=gps" target="_blank" style="color:white; text-decoration:none;">
+            3-fa-11, Hiran Magri, Sabji Mandi Road, Sector 5
+        </a> 
+        | ☎ <a href="tel:7737588116" style="color:white; text-decoration:none;">
+            7737588116
+        </a>
+                | ☎ <a href="tel:8094015023" style="color:white; text-decoration:none;">
+            8094015023
+        </a>
+    </p>
+</div>
+
+  
+  <div class="container">
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search products...">
+      <select id="filterSelect">
+        <option value="ALL">All </option>
+        <option value="KENT">KENT</option>
+        <option value="INALSA">INALSA</option>
+      </select>
+    </div>
+    
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+
+  <script>
+ const products = [
+    { name: "KENT CRYSTAL ALKALINE 11 L RO + UV + UF + TDS Control + Alkaline + UV in Tank Water Purifier  (White)", company: "KENT", image: "kent-crystal-plus-enlarge-view.png", description: "You can install the Kent Crystal Alkaline RO+UV+UF+TDS Control Water Purifier in your home and ensure a continuous supply of pure and healthy water. It gets rid of bacteria, chemicals, viruses, and dissolved contaminants, such as arsenic, rust, pesticides, fluorides, and more from water to make it suitable for drinking. Also, courtesy of RO+UV+UF+Alkaline+TDS Control+UV in-tank sterilisation, this appliance completely purifies water and makes it safe for consumption. Moreover, its TDS control valve regulates TDS levels to preserve natural minerals and make water healthy for drinking" },
+    { name: "Kent Crystal Star RO+UV+UF+TDS Control+UV In-Tank 11 L Water Purifier Black with Digital Display, 111123B", company: "KENT", image: "FUR.WAT.327489623_1727162072352.webp", description: "Star of the Crystal Series, KENT Crystal Star is a technologically advanced RO water purifier with Digital Display of Purity feature that allows real time monitoring of purified water quality, filter's life, RO flow rate etc. It uses multiple purification process of RO+UV+UF+TDS Control to make water pure while retaining its essential natural minerals. Also, the UV LED in its storage tank keeps purified water bacteria free and pure. Equipped with Zero Water Wastage Technology, this purifier recirculates water to the overhead tank using its own pump, leading to no wastage of water." },
+    { name: "KENT 16023 Electric Kettle  (1.7 L, Black)", company: "KENT", image: "download.jpg", description: "Make brewing a swift and enjoyable affair with this electric kettle from Kent. The automatic temperature cut-off turns off the appliance once your dish is cooked. Bring it home and watch it become an element of grace for your kitchen countertop" },
+    { name: "KENT Instant Egg Boiler 116020 Egg Cooker  (Silver, 7 Eggs)", company: "KENT", image: "shopping.webp", description: "Boasting a stainless steel body and equipped with a flat heating plate, this KENT Instant Egg Boiler simplifies and speeds up the way you prepare your plate of protein-rich eggs. The appliance's portable design makes it suitable for use in homes, in hotel rooms, and even in hostels." },
+    { name: "KENT MULTI COOKER (1.2 L, White)", company: "KENT", image: "1.jpg", description: "Whether you want to relish soft and fluffy idlis or eat momos or instant noodles, the KENT Multi Cooker can do it all without letting you sweat in the kitchen. This multipurpose cooker is powered by a strong 800W high-power to assist you in steaming vegetables, making idlis, momos, & instant noodles, or boil eggs. Perfect for small families or bachelors, this versatile kitchen appliance has better response to temperature change that helps you cook in less time. It comes with a cool-touch handle and an auto turn-off feature to ensure maximum safety and convenience while cooking. This easy-to-use and portable kitchen appliance has a transparent lid and an indicator light to alert you when the food is cooked. Accessories like egg boiler tray and idli maker tray make it a must have for every kitchen." },
+    { name: "KENT 16025 Sandwich Grill 700 W | Non-Toxic Ceramic Coating | Automatic Temperature Cut-off with LED Indicator | Toaster | Griller | Roaster | Sandwich maker 3 in 1 | 1 year warranty", company: "KENT", image: "2.jpg", description: "	Ergonomic handle with automatic temperature cut-off, Easy to use, clean and store, Multi-functional grill, toaster and sandwich maker, Warranty: 1 year on productErgonomic handle with automatic temperature cut-off, Easy to use, clean and store, Multi-functional grill, toaster and sandwich maker, Warranty: 1 year on product" },
+    { name: " Kent 16105 Crisp Pop Up Toaster 750 Watts | 2 Slice Automatic Pop Up Electric Toaster | 6 Heating Modes | Auto Shut Off | Removable Bread Crumbs Tray | White", company: "KENT", image: "3.jpg", description: " Family breakfast each morning is quick and effortless with the easy-to-use Kent Crisp Pop-up Toaster. Its wide slots allow the users to toast two thick slices of bread and enjoy a wholesome breakfast. Also, this pop-up toaster’s variable electronic timing control with six heating modes lets the user pick the desired crispiness while toasting. Furthermore, you can also reheat the cold toast without burning it in this appliance." },
+    { name: "KENT Sterling Star 6L RO + UV + UF + TDS Under the Sink Water Purifier with Digital Purity & Mineral Display (White/Blue)", company: "KENT", image: "5.webp", description: " Equipped with a comprehensive purification mechanism, including RO, UV, UF, and TDS Control, the KENT Sterling Star 6-Litre RO + UV + UF + TDS Water Purifier effectively eliminates bacteria, viruses, chemicals, and dissolved impurities such as arsenic, rust, pesticides, and fluorides, ensuring that it meets the stringent standards." },
+    { name: "KENT GRAND STAR 9 L RO + UV + UF + TDS Control + UV in Tank Water Purifier Suitable for all - Borewell, Tanker, Municipality Water  (White)", company: "KENT", image: "6.webp", description: "  Getting pure and safe drinking water is now quick and hassle-free with the Kent Grand Star Water Purifier. It effectively removes bacteria, chemicals, viruses etc from the water and filters out the impurities such as rust, pesticides, arsenic, and fluorides to ensure clean and pure drinking water. Also, this appliance uses multiple purification processes of RO+UV+UF+TDS Control+UV In-tank to purify and filter water. Moreover, the Mineral RO technology and a TDS control valve let you adjust the TDS levels to preserve essential minerals." },
+    { name: "Kent Grand Plus Water Purifier Ro+UV+UF+TDS Contoller+ UV in Tank", company: "KENT", image: "7.webp", description: "  Featuring a comprehensive multi-purification process, the KENT Grand+ 11099 Water Purifier combines the power of RO (Reverse Osmosis), UV (Ultraviolet), UF (Ultrafiltration), TDS Control, and UV In-tank to ensure the water you drink is not only pure but also healthy. This robust system effectively eliminates bacteria, viruses, chemicals, and a wide range of dissolved impurities like arsenic, rust, pesticides, and fluorides, providing you with safe drinking water." },
+    { name: "Kent Pearl, 8 Litres, RO+UV+UF+TDS Water Purifier,Transparent Detachable Tank, Zero Water Wastage, White", company: "KENT", image: "8.webp", description: " Clean water is crucial for every family. Safeguard the health of your loved ones by investing in this Kent Pearl 8 L Water Purifier. To remove contaminants from your drinking water and make it safe for consumption, this purifier with its Mineral RO Technology purifies water by retaining its natural nutrients. Also, the multistage purification RO+UV+UF process, effectively removes different types of bacteria, viruses and chemicals. " },
+    { name: "KENT ELEGANT 8 L RO + UV + UF + TDS Water Purifier  (White)", company: "KENT", image: "9.webp", description: " You can fulfil your family’s daily water consumption needs with the Kent Elegant Water Purifier. It ensures that your water stays free from chemicals, viruses, bacteria, and dissolved contaminants, such as pesticides, arsenic, rust, fluorides, and much more. Thanks to its RO+UV+UF+Alkaline+TDS Control+UV in-tank sterilisation, this water purifier offers purified water. Moreover, built with a TDS control valve, this water purifier changes the TDS levels to retain the important minerals in the purified water. " },
+    { name: "KENT Grand Star 9L RO + UV + UF + TDS + Alkaline Water Purifier with Digital Display (Black)", company: "KENT", image: "10.webp", description: " The technologically advanced RO water purifier KENT Crystal Star, the star of the Crystal Series, features a Digital Display of Purity feature that enables real-time monitoring of the quality of the purified water, the life of the filter, the RO flow rate, and other factors. To make water completely pure while preserving its important essential natural minerals, it uses multiple purification techniques including RO+UV+UF+TDS Control. Additionally, the UV LED in its storage reservoir maintains the purified water pure and bacterium-free. This purifier has Zero Water Wastage Technology, which uses its own pump to recirculate water to the overhead reservoir so that no water is wasted. Furthermore, this RO purifier is designed with bold black shade to accentuate your kitchen interior. " },
+    { name: "KENT Sapphire 8L RO + UV + UF + TDS Control + Alkaline Water Purifier with UV LED", company: "KENT", image: "11.jpg", description: " Bring home KENT Sapphire, beautifully designed with a harmonious blend of aesthetics and functionality. A technologically advanced RO Water Purifier with Alkaline that enhances the pH level of the purified water up to 9.5. It utilises multiple purification processes of RO+UF+Inline UV+Alkaline+TDS Control to make water pure while retaining essential natural minerals in the purified water. Also, the storage tank comes with UV LED light that keeps purified water bacteria free and pure. KENT Sapphire is a wall mountable purifier and is ideal for purification of brackish/tap water/municipal corporation water supply. " },
+    { name: " Inalsa FP INOX 1200 |1200W Motor|2.5 L Processing Jar|Chopping & Kneading Blade 1000 W Food Processor  (Silver, Black)", company: "INALSA", image: "21.jpg", description: " Most Powerful Food Processor in India: INALSA being the pioneer in introducing food processor in India more than 35 Years ago has now introduced first food processor in India with 1200 W 100% Copper Motor making it the most powerful food processor in India." },
+    { name: " Inalsa Electric Fan Room Heater Hotty- 2000Watt | Variable Temperature Control| Cool/Warm/Hot Air Selector| Over Heat Protection Fan Room Heater", company: "INALSA", image: " 22.webp", description: " The Inalsa Hotty is an electric fan heater with a 2000W power rating, featuring a cool/warm/hot air selector, variable temperature control, a rust-resistant body, and built-in overheat protection for safety. Key features include a powerful copper winded motor, portability with a carry handle, and a standard 16A socket requirement for safe operation. " },
+    { name: " INALSA Vacuum Cleaner for Home|2-in-1 Handheld & Stick Upright Vacuum for Office,800 W with 16KPA Strong Suction|HEPA Filtration|0.8L Dust Tank|Multiple Accessories,(Grey/Black)-Dura Clean Plus", company: "INALSA", image: " 23.jpg", description: " 2-in-1 Handheld & Stick Vacuum Cleaner: With this upright vacuum cleaner by Inalsa, switch easily from an upright stick vacuum to a handheld vacuum at the touch of a button and tackle trodden-in dirt, dust and debris on furniture, soft furnishings, stairs and car interiors. Powerful Cyclonic Suction: Dura Clean Plus utilizes an ultra-high 800watt powerful motor with a suction up to 16KPa, providing all-around protection in renewing all the corners of your home and car keeping neat. This vacuum cleaner can suck out as small as microns dust and particles hidden deeply in sofas and mattresses. Dirt just can't hide anymore !!" },
+    { name: " INALSA Vacuum Cleaner for Home Spruce-1200W| with Blower Function| Reusable Cloth dust Bag| Multiple Accessories | Dust Full Indicator | 2 Year Warranty", company: "INALSA", image: " 24.jpg", description: " Cleaning your room will no longer be a hassle, thanks to the Inalsa Spruce Dry Vacuum Cleaner. Courtesy of its multiple inbuilt functions, safety features, convenient use, and reusable dust bag, this vacuum cleaner offers an exceptional cleaning experience with minimal effort. Additionally, with its airflow control on its handle, this vacuum cleaner lets you regulate its airflow as per the different surfaces. And, offering a high suction power, this vacuum cleaner can easily remove mites, pollen, pet hair, dirt, dust, and skin cells with just a few swipes." },
+    { name: " INALSA Wet and Dry Vacuum Cleaner for Home,10 ltr Capacity,1200 W,14 kPa Suction,Blower Function,Wet Vacuum Cleaner for Sofa, House Cleaning Machine,Vaccine Cleaner for Home(Homeasy Wd10)", company: "INALSA", image: "25.jpg", description: "Wet or dry, bagged or bagless - No matter it is dust, hair, daily waste, the device can clean the dirt perfectly. You don't need to change filter during operation. Please take out the cloth dust filter and use sponge filter when sucking liquid, Homeasy Wet and Dry Vacuum Cleaner is equipped with a highly efficient 1200W motor & 10 Ltr Capacity " },
+    { name: "INALSA Wet and Dry Vacuum Cleaner for Home, 15 LTR Capacity,1400 W, 20 kPa Suction, Blower Function,HEPA Filter, Wet Vacuum Cleaner for Sofa, House Cleaning Machine,Stainless Steel Body (WD 15)", company: "INALSA", image: "26.jpg ", description: " WET OR DRY/ BAGGED OR BAGLESS - No matter it is dust, hair, daily waste, the device can clean the dirt perfectly. You don't need to change filter during operation. Please take out the cloth dust filter and use sponge filter when sucking liquid" },
+    { name: " INALSA Wet and Dry Vacuum Cleaner for Home, 12 LTR Capacity,1200 W, 17 kPa Suction, Blower Function, Wet Vacuum Cleaner for Sofa, House Cleaning Machine,Stainless Steel Body (WD 12)", company: "INALSA", image: " 27.jpg", description: " WET OR DRY/ BAGGED OR BAGLESS - No matter it is dust, hair, daily waste, the device can clean the dirt perfectly. You don't need to change filter during operation. Please take out the cloth dust filter and use sponge filter when sucking liquid." },
+    { name: "INALSA Wet and Dry Vacuum Cleaner for Home,20 ltr Capacity,1400 W, 20 kPa Suction,Blower Function,HEPA Filter,Wet Vacuum Cleaner for Sofa, Metal Telescopic Tube,Stainless Steel Body,Heavy duty(WD 20)", company: "INALSA", image: " 28.jpg", description: "WET AND DRY: The Wet & Dry Vacuum Cleaner is a versatile device that not only removes dry dust but is also ideal for removing wet patches. To make your cleaning tasks easy, MICRO WD 20 Wet and Dry Vacuum Cleaner is equipped with a highly efficient 1400W motor & 20 Ltr Capacity " },
+    { name: " Inalsa Master Vac 25 Wet & Dry Vacuum Cleaner ", company: "INALSA", image: "29.webp ", description: "Wet or dry, bagged or bagless - No matter it is dust, hair, daily waste, the device can clean the dirt perfectly. You don't need to change filter during operation. Please take out the cloth dust filter and use sponge filter when sucking liquid Blower function- The blower function is suitable for drying and cleaning of narrow and hard- to-reach indoor or outdoor areas. For effective blowing results, do not use any filter in vacuum cleaner. To hold a large amount of waste, this vacuum cleaner boasts a container capacity of 25 litres Powerful and durable – Equipped with powerful motor delivers 22KPA strong suction power and ensures long time operation. The vacuum cleaner has an impact resistant polymer tank for longer usage life Safe buoy technology – Safe Buoy technology immediately stops sucking water when the liquid capacity reaches the critical point. This protects the machine from being damaged and guarantees superior lifetime. This device ensures low-noise operation Flexible and convenient - With ergonomically carry handle, along with four 360° rotating wheels enable it to move flexibly to anywhere you need. Its compact and lightweight is easy to store without occupying much space " },
+    { name: " INALSA Wet and Dry Vacuum Cleaner for Home,35 ltr Capacity,1700 W, 22 kPa Suction,Blower Function,2 Yr Warranty, HEPA Filter, House Cleaning Machine,Industrial Vacuum Cleaner Heavy duty(MasterVac 35)", company: "INALSA", image: " 31.jpg", description: " WET AND DRY: The Wet & Dry Vacuum Cleaner is a versatile device that not only removes dry dust but is also ideal for removing wet patches. To make your cleaning tasks easy, Master Vac Wet and Dry Vacuum Cleaner is equipped with a highly efficient 1700W motor & 35 Ltr Capacity" },
+    { name: "Inalsa Coral 1000-Watt Electric Iron (SS/Opal White)", company: "INALSA", image: " 32.jpg", description: " The Inalsa Coral dry iron is an efficient ironing device for your home. Its unique design makes the task of ironing multiple clothing items simple and fast. The soleplate of this handy home appliance is non-stick coated to ensure that in case of overheating your favourite outfits don't get harmed. Its deluxe metal cover and smooth body gives it a classy, attractive look." },
+    { name: "  Inalsa Onyx 2200 W Steam Iron", company: "INALSA", image: " 33.webp", description: " You can conveniently iron your clothes using the Inalsa Onyx 2200 Steam Iron. It features a power indicator that alerts you of its operations. You can fill up the water tank on this steam iron up to 1 L so that you can use it to generate sufficient steam for ironing your clothes. With its self-clean function, this steam iron makes cleaning hassle-free. Moreover, thanks to its spray function, this steam iron ensures an even flow of steam to instantly remove creases and wrinkles from your clothes" },
+    { name: " INALSA Garment Steamer 1700W Steam Iron for Clothes|Variable Control Knob|Powerful Steam Upto 30g/min|1.4L Detachable Large Tank|Fabric Brush & Glove,steamer for clothes(White/Aqua Green)-Speedy Steam", company: "INALSA", image: "35.jpg", description: "Get Your Job Done in Less Time: With 1700W of power, Steam Master Garment Steamer blasts away wrinkles efficiently and easily glides across various garments, Rapid Even Heat technology gives better performance and perfect results every time, Heating Up Time (Min): <1 " },
+    { name: " INALSA Standing Garment Steamer 2000 W|Double Pole With 90° & 180° Adjustable Ironing Board |Adjustable Pole Height|2.2 L Water Tank|45 Sec Heat Up Time|32g/min Steam Output |2 Y Warranty,Swiftix 2000", company: "INALSA", image: " 34.jpg", description: " Most Powerful Wrinkle Remover - 2000 W professional steamer will heat in 45 seconds Variable Steam Output 18-32 gm/min penetrates deep and softens fibers, continuous steam softens and straightens wrinkles on clothing, drapes, upholstery and more" },
+    { name: "Inalsa 2200 W Induction Cooktop Touch Panel  (Black, InfraChef Pro 2200 Infrared Cooker)", company: "INALSA", image: " 36.jpg", description: "Transform your cooking experience with Inalsa advanced Infrared Induction Cooktop. Designed for efficiency and precision, this cutting-edge appliance utilizes infrared technology to heat up instantly and evenly, ensuring your meals are cooked to perfection every time. " },
+    { name: "Inalsa SNAX /SNAX GRILL Toast", company: "INALSA", image: "37.jpg", description: "Easy to maintain " },
+    { name: "Inalsa Dura Grill 2200-Watt Sandwich Maker/Contact Grill with Temperature Controller and LED indicator | Non-stick coated plates | Cool touch sliding Handle | 4 Slice Bread", company: "INALSA", image: "41.jpg", description: " Powerful Contact Griller: Inalsa Dura Grill comes with 2200W heating power which is a perfect fit for your daily routine. Easily usable for making large grilled sandwiches, grilled veggies, burgers and steaks" },
+    { name: "NALSA Espresso/Cappuccino 4Cup Coffee Maker 800W- Bonjour (3in1- Espresso,Cappuccino & Latte)|Frothing Function,4Bar Pressure|Multipurpose Control Knob,Removable Drip Tray & Borosilicate Glass Carafe", company: "INALSA", image: "42.jpg", description: "Brew hot coffee in minutes: Want to drink delicious and hot coffee within minutes? Inalsa Bonjour is here. With 800W of power, this coffee machine helps you brew your perfect cup every single time. Say goodbye to long waits!! " },
+    { name: "INALSA Electric Hand Blender 1200Watt 100% Copper Motor|Variable Speed and Turbo Function|Low Noise|Anti-Splash Technology|2 Yr Warranty| Home&kitchen |Chopper,Whisker ,Multipurpose Jar|(RobotINOX1200)", company: "INALSA", image: "43.jpg", description: "MOST POWERFUL HAND BLENDER IN INDIA: INALSA Hand blender 1200 watt is the most powerful hand blender in India as of now. With power of 1200W, the appliance is efficient and effective at its job of blending and mixing ingredients whether you are making meringues, mayonnaise, baby food, salads, omelet mixes or batters for baking. " },
+    { name: "Inalsa Unimix 550 W Mixer Grinder", company: "INALSA", image: "44.jpeg ", description: " INALSA Unimix Mixer Grinder With Copper Motor 550 Watt with 3 Jars Shock Proof Body and 3 Speed Setting with Pulse Dry, Wet Grinding Overload Protection -1.2litres" },
+    { name: "Inalsa Juicer Mixer Grinder 500W- Novis with 2 Jars|1.5L Blender Jar,0.7L SS Multipurpose Jar|Nozzle Cap|Shockproof Body Design,Overload Protection for Safety|ISI Marked, Made In India, White, Medium", company: "INALSA", image: "45.jpg", description: "Prepare a balanced meal with perfect nutrition in seconds. Effortlessly pulverizes fruits, vegetables, and superfoods for nutritious protein shakes and makes green smoothies every day " },
+    { name: "INALSA Stand Mixer Professional Esperto-1400W | 100% Pure Copper Motor| 6L SS Bowl| Includes Whisking Cone, Mixing Beater & Dough Hook", company: "INALSA", image: "46.jpg", description: " The INALSA Esperto Stand Mixer comes with powerful 100% Copper winding 1400 W Motor and multi function capabilities to serve all your kitchen needs" },
+    { name: "Inalsa Nutri Mixer-Jiffy|Grinder&Blender|Powerful 400W Motor|2 Speed|Unbreakable Blender Jar|Stainless Steel|Ss Blades|Multipurpose Jar|Made In India|1 Year Warranty|Black,400 Watt", company: "INALSA", image: "47.jpg", description: " Performance with Style – 400W Powerful motor ensures powerful processing every time and allows to serve all your cooking needs. Now expand your creativity in the kitchen-chop, blend, mix, grate, puree and grind with INALSA Nutri Mixer – Jiffy that makes cooking fun" },
+    { name: "Inalsa Easy Prep 800W Food Processor with 1.4L Bowl", company: "INALSA", image: "48.jpeg", description: "All-in-One Multi-Functionality - 6 Kitchen Appliances in 1 - Say goodbye to cluttered countertops and multiple appliances. The INALSA Easy Prep Food Processor combines the power of six essential kitchen tools into one compact device. Use it as a blender, juicer, atta kneader, vegetable slicer, chopper, and dry grinder. " },
+    { name: "Inalsa Verve 800W Food Processor with 100% Pure Copper Motor| 2 Multipurpose Jars & 11 Accessories 800 W Food Processor", company: "INALSA", image: "51.jpg", description: "You can make use of the powerful and practical Inalsa Verve Food Processor to complete your daily cooking tasks with ease. Its pure copper motor is durable and capable of quickly and effectively processing food items. This food processor grinds, shreds, grates, chops, slices, emulsifies, kneads, and mixes ingredients. Also, its stainless steel blades can finely chop and grind veggies and meat. Moreover, this food processor’s BPA-free and break-resistant jars are strong, safe to use, and durable. " },
+    { name: "Inalsa Inox 1000 Pro Food Processor for Kitchen 1000W Copper Motor", company: "INALSA", image: "61.webp", description: "Spend Less Time In The Kitchen-This multi-function 1000W food processor comes quipped with 100% Copper Motor & does it all. Ideal for busy kitchens when space is at a premium. " },
+    { name: "INALSA Air Fryer Oven With 23L Capacity,1700 W-Aero Smart23,Digital Display and Touch Control ", company: "INALSA", image: "63.webp", description: " 16 PRESET FUNCTIONS: Choose the preset that’s best for you without needing to set a temperature. Pick from Air fry, Toast, Bagel, Reheat, Broil, Pizza, Roast, Dehydrate, Low, Fries, Snacks, Vegetables, Bake, Ferment, Nuggets or select Warm to keep your food ready to serve. Its Touch control panel with Digital Display helps to easily operate and select different functions." },
+    { name: "Inalsa MasterChef 19 BKR 19L OTG Microwave Oven", company: "INALSA", image: "62.webp", description: " With 1300W of power, this oven toaster griller heats up in 2-3 minutes and cooks food faster. Save Time and Money on your Electricity Bills and at the same time you get to cut down the calories." },
+    { name: "KENT Smart Nutri Blender", company: "KENT", image: "64.png", description: "KENT Smart Nutri Blender has the power and space you were looking for. A much loved by the nuclear families, this smart blender makes your life convenient. An amazing smart product for easy blending and grinding, it will help expand your culinary horizon. With 20,000 rpm speed, 2 plastic jars, and 1 SS jar – the blender can be a great replacement for those heavy and unmanageable grinders and blenders. Ideal for preparing purees, shakes, chutneys, and smoothies – all within minutes. " },
+    { name: "KENT Electric Chopper-B  ", company: "KENT", image: "65.png", description: "Welcome the smart KENT Electric Chopper Black to your kitchen and get rid of all the tedious chopping. Equipped with sharp stainless steel double chopping blades, this 250W chopper is perfect to get your kitchen chores done quickly and hygienically. Just with a press of single button you can chop your ingredients to fine, medium, or coarse textures. Apart from veggies, this chopper can also be used to whisk cream using the plastic whisking attachment. It features a 400ml chopping bowl made of food-grade plastic to ensure healthy and hygienic cooking. Also, this transparent bowl lets you keep a check on chopping level without opening the lid. To ensure maximum stability while chopping, this product has anti-skid ring at the bottom of the bowl. " },
+    { name: "KENT Super Power Grinder & Blender", company: "KENT", image: "66.png", description: "KENT Super Power Grinder and Blender has 30,000rpm electronic variable speed operation, so you can blend and grind anything within seconds. Whether it’s your favorite ice-crushed smoothie, chutney for snack time, dosa batter, or freshly grounded raw haldi, this kitchen appliance can do all. " },
+    { name: "KENT Digi Plus Air Fryer 4L", company: "KENT", image: "67.png", description: "Now enjoy your favourite snacks in a healthy way with KENT Digi Plus Air Fryer. KENT Digi Plus Air Fryer is all set to make your snacking a lot smarter and healthier. It ensures that your snack is nice and crispy on the outside and soft inside. It is healthy too, as it requires minimum or no oil. It comes with a digital display which makes operation simple. So, next time you crave for a tasty snack, you know you can enjoy it guilt-free with KENT Digi Plus Air Fryer. " },
+    { name: "KENT STAND MIXER", company: "KENT", image: "68.png", description: "Introducing the KENT Stand Mixer – your ultimate kitchen companion for effortless and efficient mixing, kneading, and whisking. With its powerful 1300 W and 100% copper motor and versatile attachments, this stand mixer brings professional-grade performance to your home, making delicious baked goods, perfect dough, and fluffy meringues easier than ever. Designed with a sleek, modern aesthetic and user-friendly controls, the KENT Stand Mixer is not just a tool, but a statement piece for your kitchen. Elevate your culinary creations with the power and precision of KENT. " },
+    { name: " KENT Hand Blender – 150W", company: "KENT", image: "69.png", description: "The ergonomically designed smart kitchen appliance for smart chefs and homemakers, KENT Hand Blender is perfect for a speedy and easy cooking process. The blender is very handy and you can mix, blend, fold, whip, and beat both hot and cold ingredients in no time. Other important features such as variable speed control and multiple beaters, makes the cooking and baking trouble-free. " },
+    { name: "KENT Hand Blender 400W ", company: "KENT", image: "70.png", description: " Once you own this Kent’s Hand Blender, you won’t feel that ‘cooking is a struggle’. A very versatile and convenient kitchen appliance that can whisk and blend ingredients effortlessly. Available with a powerful and efficient motor it ensures fast and great results. The variable speed control lets you adjust the speed as per your needs. Apart from this, the stainless steel body makes this smart appliance a durable product for your kitchen." },
+];
+
+    function displayProducts(filteredProducts) {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+      filteredProducts.forEach(product => {
+        const card = document.createElement("div");
+        card.classList.add("product-card");
+        card.onclick = () => openProductPage(product);
+        card.innerHTML = `
+          <img src="${product.image}" alt="${product.name}">
+          <h3>${product.name}</h3>
+          <p>${product.company}</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function openProductPage(product) {
+      localStorage.setItem("selectedProduct", JSON.stringify(product));
+      window.location.href = "product.html";
+    }
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      const searchTerm = this.value.toLowerCase();
+      const filterValue = document.getElementById("filterSelect").value;
+      const filtered = products.filter(product =>
+        product.name.toLowerCase().includes(searchTerm) &&
+        (filterValue === "all" || product.company === filterValue)
+      );
+      displayProducts(filtered);
+    });
+
+    document.getElementById("filterSelect").addEventListener("change", function () {
+      const searchTerm = document.getElementById("searchInput").value.toLowerCase();
+      const filterValue = this.value;
+      const filtered = products.filter(product =>
+        product.name.toLowerCase().includes(searchTerm) &&
+        (filterValue === "all" || product.company === filterValue)
+      );
+      displayProducts(filtered);
+    });
+
+    displayProducts(products);
+  </script>
+</body>
+</html>
